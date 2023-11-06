@@ -2,26 +2,39 @@ const Gameboard = require("../src/gameboard");
 const Ship = require("../src/ship");
 
 test("Gameboard creates an empty board", () => {
-  const gameboard1 = Gameboard();
-  expect(gameboard1.board).toEqual([
-    [["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"]],
-    [["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"]],
-    [["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"]],
-    [["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"]],
-    [["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"]],
-    [["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"]],
-    [["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"]],
-    [["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"]],
-    [["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"]],
-    [["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"], ["o"]],
+  const gameboard = Gameboard();
+  expect(gameboard.board).toEqual([
+    [["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"]],
+    [["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"]],
+    [["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"]],
+    [["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"]],
+    [["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"]],
+    [["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"]],
+    [["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"]],
+    [["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"]],
+    [["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"]],
+    [["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"]],
   ]);
 });
 
-test("Gameboard places a ship", () => {
-  const gameboard2 = Gameboard();
-  gameboard2.placeShip(1, [0, 0]);
+test("Gameboard correctly places a ship on the board", () => {
+  const gameboard = Gameboard();
+  const ship = Ship(1);
+  gameboard.placeShip(ship, 0, 0);
 
-  expect(JSON.stringify(gameboard2.board[0][0])).toEqual(
-    JSON.stringify(Ship(1)),
-  );
+  expect(gameboard.board[0][0]).toEqual(ship);
+});
+
+test("Hit a ship", () => {
+  const gameboard = Gameboard();
+  gameboard.placeShip(Ship(1), 0, 0);
+  gameboard.receiveAttack(0, 0);
+  expect(gameboard.board[0][0].isSunk).toBeTruthy();
+});
+
+test.skip("Miss a ship", () => {
+  const gameboard = Gameboard();
+  gameboard.placeShip(Ship(1), 0, 0);
+
+  expect(gameboard2.board[0][0]).toEqual(ship);
 });
