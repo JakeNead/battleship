@@ -1,5 +1,5 @@
-function Ship(size) {
-  let hp = size;
+function Ship(length) {
+  let hp = length;
   function hit() {
     hp -= 1;
   }
