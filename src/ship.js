@@ -6,7 +6,7 @@ function Ship(size) {
   function isSunk() {
     return hp <= 0;
   }
-  return { hit, isSunk };
+  return { hp, hit, isSunk };
 }
 
 module.exports = Ship;
