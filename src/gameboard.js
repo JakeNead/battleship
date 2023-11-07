@@ -8,11 +8,20 @@ function Gameboard() {
     }
   }
 
-  function placeShip(ship, x, y) {
-    for (let i = x; i < x + ship.hp; i += 1) {
-      board[i][y][0] = ship;
+  function shipNotOverlapping(length, x, y) {
+    for (let i = x; i < x + length; i += 1) {
+      if (typeof board[i][y][0] === "object") return false;
     }
-    fleet.push(ship);
+    return true;
+  }
+
+  function placeShip(ship, x, y) {
+    if (shipNotOverlapping(ship.hp, x, y)) {
+      for (let i = x; i < x + ship.hp; i += 1) {
+        board[i][y][0] = ship;
+      }
+      fleet.push(ship);
+    }
   }
 
   function receiveAttack(x, y) {
