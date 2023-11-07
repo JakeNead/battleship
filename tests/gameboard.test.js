@@ -52,12 +52,12 @@ test("Hit a ship", () => {
   expect(gameboard.board[0][0][1].isSunk()).toBeTruthy();
 });
 
-test.skip("Sink a ship", () => {
+test("Sink a ship", () => {
   const gameboard = Gameboard();
   gameboard.placeShip(Ship(2), 0, 0);
   gameboard.receiveAttack(0, 0);
   gameboard.receiveAttack(1, 0);
-  expect(gameboard.board[0][0].isSunk()).toBeTruthy();
+  expect(gameboard.board[0][0][1].isSunk()).toBeTruthy();
 });
 
 test("Miss a ship", () => {
@@ -73,7 +73,7 @@ test("attack cell twice error ", () => {
   expect(gameboard.receiveAttack(2, 4)).toBe("Can't hit this cell twice");
 });
 
-test.skip("All ships sunk", () => {
+test("All ships sunk", () => {
   const gameboard = Gameboard();
   gameboard.placeShip(Ship(1), 5, 5);
   gameboard.receiveAttack(5, 5);
@@ -81,11 +81,10 @@ test.skip("All ships sunk", () => {
   gameboard.placeShip(Ship(2), 7, 7);
   gameboard.receiveAttack(7, 7);
   gameboard.receiveAttack(8, 7);
-  console.log(gameboard.fleet);
   expect(gameboard.allShipsSunk()).toBeTruthy();
 });
 
-test.skip("All ships not sunk", () => {
+test("All ships not sunk", () => {
   const gameboard = Gameboard();
   gameboard.placeShip(Ship(1), 5, 5);
   gameboard.receiveAttack(5, 5);
