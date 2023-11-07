@@ -1,6 +1,5 @@
-const Ship = require("./ship");
-
 function Gameboard() {
+  const fleet = [];
   const board = [];
   for (let i = 0; i < 10; i += 1) {
     board.push([]);
@@ -8,26 +7,32 @@ function Gameboard() {
       board[i].push(["e"]);
     }
   }
+
   function placeShip(ship, x, y) {
-    board[x][y] = ship;
-  }
-  function receiveAttack(x, y) {
-    if (board[x][y] === "m") {
-      return;
+    for (let i = x; i < x + ship.hp; i += 1) {
+      board[i][y][0] = ship;
     }
-    if (board[x][y] === "e") {
-      board[x][y] = "m";
-    } else {
-      board[x][y].hit();
-    }
+    fleet.push(ship);
   }
 
-  return { board, placeShip, receiveAttack };
+  function receiveAttack(x, y) {
+    if (board[x][y][0] === "e") {
+      board[x][y][0] = "m";
+      return "miss";
+    }
+    if (typeof board[x][y][0] === "object") {
+      board[x][y][0].hit();
+      board[x][y].unshift("h");
+      return "hit";
+    }
+    return "Can't hit this cell twice";
+  }
+
+  function allShipsSunk() {
+    return fleet.every((ship) => ship.isSunk() === true);
+  }
+
+  return { board, placeShip, receiveAttack, allShipsSunk };
 }
 
 module.exports = Gameboard;
-
-// placeShip(shipLength, coord)
-// board = 10x10 2d array
-//      items contain['e',ship]
-//      e,m,{} (empty, missed, hit)
