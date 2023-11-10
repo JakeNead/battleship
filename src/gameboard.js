@@ -34,7 +34,7 @@ function Gameboard() {
       board[x][y].unshift("h");
       return "hit";
     }
-    return "Can't hit this cell twice";
+    return "illegal move";
   }
 
   function allShipsSunk() {

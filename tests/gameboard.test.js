@@ -70,7 +70,7 @@ test("attack cell twice error ", () => {
   const gameboard = Gameboard();
   gameboard.placeShip(Ship(2), 2, 4);
   gameboard.receiveAttack(2, 4);
-  expect(gameboard.receiveAttack(2, 4)).toBe("Can't hit this cell twice");
+  expect(gameboard.receiveAttack(2, 4)).toBe("illegal move");
 });
 
 test("All ships sunk", () => {
