@@ -45,6 +45,13 @@ test("Gameboard won't place overlapping ships.", () => {
   expect(gameboard.board[2][0][0]).toBe(ship);
 });
 
+test("Gameboard won't place ships outiside board coordinates.", () => {
+  const gameboard = Gameboard();
+  const ship = Ship(3);
+  gameboard.placeShip(ship, 9, 0);
+  expect(gameboard.board[9][0][0]).toBe("e");
+});
+
 test("Hit a ship", () => {
   const gameboard = Gameboard();
   gameboard.placeShip(Ship(1), 0, 0);

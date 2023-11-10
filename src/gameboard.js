@@ -15,8 +15,15 @@ function Gameboard() {
     return true;
   }
 
+  function shipNotOverflowing(length, x) {
+    for (let i = x; i < x + length; i += 1) {
+      if (i > 9) return false;
+    }
+    return true;
+  }
+
   function placeShip(ship, x, y) {
-    if (shipNotOverlapping(ship.hp, x, y)) {
+    if (shipNotOverflowing(ship.hp, x) && shipNotOverlapping(ship.hp, x, y)) {
       for (let i = x; i < x + ship.hp; i += 1) {
         board[i][y][0] = ship;
       }
