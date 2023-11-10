@@ -1,5 +1,5 @@
-console.log("test");
-
-const a = 8;
-
-console.log(a + 2);
+function gameLoop() {
+  // While p1 has shipsNotSunk && While p2 has shipsNotSunk
+  //   p1.'aiAttack'
+  //   p2.recieveAttack('user input')
+}
