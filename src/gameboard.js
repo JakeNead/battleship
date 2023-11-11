@@ -1,3 +1,5 @@
+const Ship = require("./ship");
+
 function Gameboard() {
   const fleet = [];
   const board = [];
@@ -22,9 +24,10 @@ function Gameboard() {
     return true;
   }
 
-  function placeShip(ship, x, y) {
-    if (shipNotOverflowing(ship.hp, x) && shipNotOverlapping(ship.hp, x, y)) {
-      for (let i = x; i < x + ship.hp; i += 1) {
+  function placeShip(size, x, y) {
+    const ship = Ship(size, x, y);
+    if (shipNotOverflowing(size, x) && shipNotOverlapping(size, x, y)) {
+      for (let i = x; i < x + size; i += 1) {
         board[i][y][0] = ship;
       }
       fleet.push(ship);
