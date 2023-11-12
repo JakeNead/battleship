@@ -1,5 +1,5 @@
 const gameLoop = require("../src/index");
 
-test("Gameloop returns p1 winner", () => {
-  expect().toBe();
+test("Gameloop returns a winner", () => {
+  expect(gameLoop()).toEqual(expect.stringContaining("wins"));
 });
