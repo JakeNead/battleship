@@ -4,10 +4,14 @@ function Gameboard() {
   const fleet = [];
   const board = [];
   for (let i = 0; i < 10; i += 1) {
-    board.push([]);
+    board[i] = [];
     for (let j = 0; j < 10; j += 1) {
       board[i].push(["e"]);
     }
+  }
+
+  function getBoard() {
+    return board;
   }
 
   function shipNotOverlapping(length, x, y) {
@@ -51,7 +55,7 @@ function Gameboard() {
     return fleet.every((ship) => ship.isSunk() === true);
   }
 
-  return { board, placeShip, receiveAttack, allShipsSunk };
+  return { getBoard, placeShip, receiveAttack, allShipsSunk };
 }
 
 module.exports = Gameboard;

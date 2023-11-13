@@ -3,7 +3,7 @@ const Ship = require("../src/ship");
 
 test("Gameboard creates an empty board", () => {
   const gameboard = Gameboard();
-  expect(gameboard.board).toEqual([
+  expect(gameboard.getBoard()).toEqual([
     [["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"]],
     [["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"]],
     [["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"], ["e"]],
@@ -20,7 +20,7 @@ test("Gameboard creates an empty board", () => {
 test("Gameboard correctly places a 1 length ship on the board", () => {
   const gameboard = Gameboard();
   gameboard.placeShip(1, 0, 0);
-  expect(JSON.stringify(gameboard.board[0][0][0])).toBe(
+  expect(JSON.stringify(gameboard.getBoard()[0][0][0])).toBe(
     JSON.stringify(Ship(1)),
   );
 });
@@ -29,13 +29,13 @@ test("Gameboard correctly places a 3 length ship horizontally", () => {
   const gameboard = Gameboard();
   gameboard.placeShip(3, 3, 5);
 
-  expect(JSON.stringify(gameboard.board[3][5][0])).toBe(
+  expect(JSON.stringify(gameboard.getBoard()[3][5][0])).toBe(
     JSON.stringify(Ship(3)),
   );
-  expect(JSON.stringify(gameboard.board[4][5][0])).toBe(
+  expect(JSON.stringify(gameboard.getBoard()[4][5][0])).toBe(
     JSON.stringify(Ship(3)),
   );
-  expect(JSON.stringify(gameboard.board[5][5][0])).toBe(
+  expect(JSON.stringify(gameboard.getBoard()[5][5][0])).toBe(
     JSON.stringify(Ship(3)),
   );
 });
@@ -45,7 +45,7 @@ test("Gameboard won't place overlapping ships.", () => {
   gameboard.placeShip(3, 0, 0);
   gameboard.placeShip(1, 2, 0);
 
-  expect(JSON.stringify(gameboard.board[2][0][0])).toBe(
+  expect(JSON.stringify(gameboard.getBoard()[2][0][0])).toBe(
     JSON.stringify(Ship(3)),
   );
 });
@@ -54,14 +54,14 @@ test("Gameboard won't place ships outiside board coordinates.", () => {
   const gameboard = Gameboard();
 
   gameboard.placeShip(3, 9, 0);
-  expect(gameboard.board[9][0][0]).toBe("e");
+  expect(gameboard.getBoard()[9][0][0]).toBe("e");
 });
 
 test("Hit a ship", () => {
   const gameboard = Gameboard();
   gameboard.placeShip(2, 0, 0);
   gameboard.receiveAttack(0, 0);
-  expect(gameboard.board[0][0][0]).toBe("h");
+  expect(gameboard.getBoard()[0][0][0]).toBe("h");
 });
 
 test("Sink a ship", () => {
@@ -69,7 +69,7 @@ test("Sink a ship", () => {
   gameboard.placeShip(2, 0, 0);
   gameboard.receiveAttack(0, 0);
   gameboard.receiveAttack(1, 0);
-  expect(gameboard.board[0][0][1].isSunk()).toBeTruthy();
+  expect(gameboard.getBoard()[0][0][1].isSunk()).toBeTruthy();
 });
 
 test("Miss a ship", () => {
