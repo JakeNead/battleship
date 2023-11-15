@@ -10,5 +10,5 @@ test("Player creates a board", () => {
 test("AI makes random legal attacks", () => {
   const player1 = Player();
   player1.aiAttack();
-  expect(player1.gameboard.board.flat(2).includes("m")).toBeTruthy();
+  expect(player1.gameboard.getBoard().flat(2).includes("m")).toBeTruthy();
 });
