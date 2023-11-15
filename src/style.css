@@ -1,0 +1,9 @@
+main {
+  display: flex;
+}
+#p1Board,
+#p2Board {
+  border: 2px solid black;
+  width: 300px;
+  height: 300px;
+}
