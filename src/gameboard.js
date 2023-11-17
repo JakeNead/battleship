@@ -32,7 +32,8 @@ function Gameboard() {
     const ship = Ship(size, x, y);
     if (shipNotOverflowing(size, x) && shipNotOverlapping(size, x, y)) {
       for (let i = x; i < x + size; i += 1) {
-        board[i][y][0] = ship;
+        board[i][y][0] = "s";
+        board[i][y][1] = ship;
       }
       fleet.push(ship);
     }
@@ -43,9 +44,9 @@ function Gameboard() {
       board[x][y][0] = "m";
       return "miss";
     }
-    if (typeof board[x][y][0] === "object") {
-      board[x][y][0].hit();
-      board[x][y].unshift("h");
+    if (board[x][y][0] === "s") {
+      board[x][y][1].hit();
+      board[x][y] = "h";
       return "hit";
     }
     return "illegal move";
