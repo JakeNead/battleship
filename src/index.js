@@ -7,6 +7,7 @@ const Dom = dom();
 Dom.initPage();
 
 function gameController() {
+  // eventually allow player to place ships
   const p1 = Player();
   p1.gameboard.placeShip(5, 0, 0);
   p1.gameboard.placeShip(4, 5, 2);
@@ -22,8 +23,19 @@ function gameController() {
 
   Dom.renderGameboard("p1", p1.gameboard);
   Dom.renderGameboard("p2", p2.gameboard);
+  Dom.playerClicks();
 
-  function gameTurns() {
+  function gameTurns(coord) {
+    // eventually replace aiAttack with user click events
+
+    p2.aiAttack();
+    // p1.gameboard.receiveAttack(coord);
+    Dom.clearGameboard("p2");
+    Dom.renderGameboard("p2", p2.gameboard);
+    if (p2.gameboard.allShipsSunk()) {
+      // Dom.winner("p1");
+      return "p1 wins";
+    }
     p1.aiAttack();
     Dom.clearGameboard("p1");
     Dom.renderGameboard("p1", p1.gameboard);
@@ -32,16 +44,10 @@ function gameController() {
       return "p2 wins";
     }
 
-    p2.aiAttack();
-    Dom.clearGameboard("p2");
-    Dom.renderGameboard("p2", p2.gameboard);
-    if (p2.gameboard.allShipsSunk()) {
-      // Dom.winner("p2");
-      return "p1 wins";
-    }
-    gameTurns();
+    // gameTurns();
   }
-  gameTurns();
+  // gameTurns();
+  return { gameTurns };
 }
 
 gameController();
