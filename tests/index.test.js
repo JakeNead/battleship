@@ -1,5 +1,9 @@
-const gameLoop = require("../src/index");
+const gameController = require("../src/index");
 
-test("Gameloop returns a winner", () => {
-  expect(gameLoop()).toEqual(expect.stringContaining("wins"));
+test("GameController returns a winner", () => {
+  expect(gameController()).toEqual(expect.stringContaining("wins"));
 });
+
+// incoming query - Assert Result
+// incoming command - Assert direct public side effects
+// outgoing command - Expect to send
