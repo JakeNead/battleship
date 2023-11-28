@@ -1,8 +1,7 @@
 const gameController = require("./index");
 
 // eslint-disable-next-line prefer-destructuring
-console.log(gameController.gameTurns);
-const { gameTurns } = gameController();
+// const { gameTurns } = gameController();
 function Dom() {
   function initPage() {
     const body = document.querySelector("body");
@@ -42,18 +41,26 @@ function Dom() {
     // this will run when gameTurns detects a winner
   }
 
-  function shoot(cell) {
+  function shoot(cell, gameTurns, player) {
     const x = cell.dataset.coordinate[0];
     const y = cell.dataset.coordinate[1];
-    gameTurns(x, y);
+    player.gameboard.receiveAttack(x, y);
+    gameTurns();
   }
 
-  function playerClicks() {
+  function playerClicks(gameTurns, player) {
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => {
-      cell.addEventListener("click", shoot(cell));
+      if (!cell.classList.contains("h") || !cell.classList.contains("m"))
+        cell.addEventListener("click", () => shoot(cell, gameTurns, player));
     });
   }
+  // function disableAttacks(gameTurns, player) {
+  //   const cells = document.querySelectorAll(".e");
+  //   cells.forEach((cell) => {
+  //     cell.removeEventListener("click", shoot());
+  //   });
+  // }
 
   return {
     renderGameboard,
@@ -61,6 +68,7 @@ function Dom() {
     declareWinner,
     initPage,
     playerClicks,
+    // disableAttacks,
   };
 }
 
