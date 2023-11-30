@@ -1,9 +1,57 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0px;
+}
+body {
+  background-color: rgb(249, 245, 238);
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+#overlay {
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  z-index: 2;
+  background-color: rgb(249, 245, 238);
+  opacity: 70%;
+}
+
+#popup {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid black;
+  background-color: rgb(249, 245, 238);
+  width: 150px;
+  height: 250px;
+  z-index: 3;
+}
+
+h2 {
+  text-align: center;
+  padding: 1rem;
+}
+
+h1 {
+  padding: 2rem;
+  text-align: center;
+}
+
 main {
   display: flex;
+  justify-content: center;
 }
-#p1Board,
-#p2Board {
-  border: 2px solid black;
+#boards {
+  display: flex;
+  gap: 2rem;
+}
+.p1Board,
+.p2Board {
+  /* border: 2px solid black; */
   width: 300px;
   aspect-ratio: 1 / 1;
   display: grid;
@@ -20,6 +68,15 @@ main {
 .e {
   border: 1px solid black;
   height: 100%;
+  margin: 1px;
+}
+.h,
+.m {
+  pointer-events: none;
+}
+.e,
+.s {
+  cursor: pointer;
 }
 
 .h {
@@ -27,4 +84,7 @@ main {
 }
 .m {
   background-color: rgb(48, 48, 179);
+}
+footer {
+  text-align: center;
 }
