@@ -6,21 +6,22 @@ const dom = require("./dom");
 const Dom = dom();
 Dom.initPage();
 
-function gameController() {
+function gameLoop() {
   // eventually allow player to place ships
   const p1 = Player();
-  // p1.gameboard.placeShip(5, 0, 0);
-  // p1.gameboard.placeShip(4, 5, 2);
-  // p1.gameboard.placeShip(3, 3, 5);
-  // p1.gameboard.placeShip(3, 0, 8);
+  p1.gameboard.placeShip(5, 0, 0);
+  p1.gameboard.placeShip(4, 5, 2);
+  p1.gameboard.placeShip(3, 3, 5);
+  p1.gameboard.placeShip(3, 0, 8);
   p1.gameboard.placeShip(2, 6, 8);
   const p2 = Player();
-  // p2.gameboard.placeShip(5, 5, 9);
-  // p2.gameboard.placeShip(4, 1, 3);
-  // p2.gameboard.placeShip(3, 3, 5);
-  // p2.gameboard.placeShip(3, 7, 2);
+  p2.gameboard.placeShip(5, 5, 9);
+  p2.gameboard.placeShip(4, 1, 3);
+  p2.gameboard.placeShip(3, 3, 5);
+  p2.gameboard.placeShip(3, 7, 2);
   p2.gameboard.placeShip(2, 2, 1);
 
+  // gameboards will render after user places ships
   Dom.renderGameboard("p1", p1.gameboard);
   Dom.renderGameboard("p2", p2.gameboard);
 
@@ -48,8 +49,15 @@ function gameController() {
   return {};
 }
 
-gameController();
+gameLoop();
 
-module.exports = gameController;
+module.exports = gameLoop;
 
-// stop p2 board click events after winner declared
+// implement func for user to place ships
+//  overlay a gamboard and let the user place each ship in order from large to small
+// horizontal only
+
+// initPage()
+// create p1/p2
+// placeShipOverlay()
+//    after last ship render boards and playerClicks()
