@@ -1,17 +1,15 @@
 const gameController = require("./index");
 
-// eslint-disable-next-line prefer-destructuring
-// const { gameTurns } = gameController();
 function Dom() {
   function initPage() {
     const body = document.querySelector("body");
     body.innerHTML =
-      "<header>BATTLESHIP</header><main><div id='p1Board'></div><div id='p2Board'></div></main><footer>Made by Jake</footer>";
+      "<div id='overlay'></div><div id='popup'><h2>Place your ships</h2></div><header><h1>BATTLESHIP</h1></header><main><div id='boards'><div class='p1Board'></div><div class='p2Board'></div></div></main><footer>Made by Jake</footer>";
   }
 
   function renderGameboard(playerBoard, board) {
-    const p1Board = document.querySelector("#p1Board");
-    const p2Board = document.querySelector("#p2Board");
+    const p1Board = document.querySelector(".p1Board");
+    const p2Board = document.querySelector(".p2Board");
     let container;
     if (playerBoard === "p1") container = p1Board;
     else container = p2Board;
@@ -21,7 +19,10 @@ function Dom() {
       container.appendChild(boardColumn);
       for (let j = 0; j < 10; j += 1) {
         const cell = document.createElement("div");
-        cell.classList.add("cell", `${board.getBoard()[i][j][0]}`);
+        cell.classList.add(
+          `${playerBoard}cell`,
+          `${board.getBoard()[i][j][0]}`,
+        );
         cell.setAttribute("data-coordinate", `${[i]}${[j]}`);
         boardColumn.appendChild(cell);
       }
@@ -29,8 +30,8 @@ function Dom() {
   }
 
   function clearGameboard(player) {
-    const p1Board = document.querySelector("#p1Board");
-    const p2Board = document.querySelector("#p2Board");
+    const p1Board = document.querySelector(".p1Board");
+    const p2Board = document.querySelector(".p2Board");
     let playerBoard;
     if (player === "p1") playerBoard = p1Board;
     else playerBoard = p2Board;
@@ -49,18 +50,12 @@ function Dom() {
   }
 
   function playerClicks(gameTurns, player) {
-    const cells = document.querySelectorAll(".cell");
+    const cells = document.querySelectorAll(".p2cell");
     cells.forEach((cell) => {
       if (!cell.classList.contains("h") || !cell.classList.contains("m"))
         cell.addEventListener("click", () => shoot(cell, gameTurns, player));
     });
   }
-  // function disableAttacks(gameTurns, player) {
-  //   const cells = document.querySelectorAll(".e");
-  //   cells.forEach((cell) => {
-  //     cell.removeEventListener("click", shoot());
-  //   });
-  // }
 
   return {
     renderGameboard,
