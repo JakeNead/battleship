@@ -20,24 +20,16 @@ test("Gameboard creates an empty board", () => {
 test("Gameboard correctly places a 1 length ship on the board", () => {
   const gameboard = Gameboard();
   gameboard.placeShip(1, 0, 0);
-  expect(JSON.stringify(gameboard.getBoard()[0][0][0])).toBe(
-    JSON.stringify(Ship(1)),
-  );
+  expect(gameboard.getBoard()[0][0][0]).toBe("s");
 });
 
 test("Gameboard correctly places a 3 length ship horizontally", () => {
   const gameboard = Gameboard();
   gameboard.placeShip(3, 3, 5);
 
-  expect(JSON.stringify(gameboard.getBoard()[3][5][0])).toBe(
-    JSON.stringify(Ship(3)),
-  );
-  expect(JSON.stringify(gameboard.getBoard()[4][5][0])).toBe(
-    JSON.stringify(Ship(3)),
-  );
-  expect(JSON.stringify(gameboard.getBoard()[5][5][0])).toBe(
-    JSON.stringify(Ship(3)),
-  );
+  expect(gameboard.getBoard()[3][5][0]).toBe("s");
+  expect(gameboard.getBoard()[4][5][0]).toBe("s");
+  expect(gameboard.getBoard()[5][5][0]).toBe("s");
 });
 
 test("Gameboard won't place overlapping ships.", () => {
@@ -45,9 +37,7 @@ test("Gameboard won't place overlapping ships.", () => {
   gameboard.placeShip(3, 0, 0);
   gameboard.placeShip(1, 2, 0);
 
-  expect(JSON.stringify(gameboard.getBoard()[2][0][0])).toBe(
-    JSON.stringify(Ship(3)),
-  );
+  expect(gameboard.getBoard()[2][0][0]).toBe("s");
 });
 
 test("Gameboard won't place ships outiside board coordinates.", () => {
