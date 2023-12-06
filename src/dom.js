@@ -6,6 +6,9 @@ function Dom() {
     body.innerHTML =
       "<div id='overlay'></div><div id='popup'><h2 id='currentShipHeader'></h2><div id='placeShipsBoard'></div></div><header><h1>BATTLESHIP</h1></header><main><div id='boards'><div id='p1Board'></div><div id='p2Board'></div></div></main><footer>Made by Jake</footer>";
   }
+  // const p1Board = document.querySelector("#p1Board");
+  // const p2Board = document.querySelector("#p2Board");
+  // const popupBoard = document.querySelector("#placeShipsBoard");
 
   function renderGameboard(playerBoard, board) {
     const p1Board = document.querySelector("#p1Board");
@@ -31,14 +34,11 @@ function Dom() {
       }
     }
   }
-  const p1Board = document.querySelector(".p1Board");
-  const p2Board = document.querySelector(".p2Board");
-  const popupBoard = document.querySelector("#placeShipsBoard");
 
   function clearGameboard(player) {
-    // const p1Board = document.querySelector(".p1Board");
-    // const p2Board = document.querySelector(".p2Board");
-    // const popupBoard = document.querySelector("#placeShipsBoard");
+    const p1Board = document.querySelector(".p1Board");
+    const p2Board = document.querySelector(".p2Board");
+    const popupBoard = document.querySelector("#placeShipsBoard");
     let playerBoard;
     if (player === "p1") playerBoard = p1Board;
     else if (player === "p2") playerBoard = p2Board;
@@ -102,6 +102,8 @@ function Dom() {
   function dismissPopup() {}
 
   function placeShipsPopup(gameboard, shipIndex = 0) {
+    const popupBoard = document.querySelector("#placeShipsBoard");
+    console.log(popupBoard);
     const currentShipHeader = document.querySelector("#currentShipHeader");
     if (popupBoard) clearGameboard("popupBoard");
     renderGameboard("popupBoard", gameboard);
@@ -119,7 +121,17 @@ function Dom() {
         cell.addEventListener("mouseleave", () =>
           hoverShipDisplay(cell, shipIndex, "leave"),
         ),
-        cell.addEventListener("click"),
+        cell.addEventListener("click", () => {
+          if (
+            gameboard.placeShip(
+              currentShip(shipIndex).size,
+              Number(cell.dataset.x),
+              Number(cell.dataset.y),
+            )
+          ) {
+            placeShipsPopup(gameboard, shipIndex + 1);
+          }
+        }),
       ),
     );
 
