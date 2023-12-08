@@ -9,17 +9,12 @@ Dom.initPage();
 function gameLoop() {
   // eventually allow player to place ships
   const p1 = Player();
-  p1.gameboard.placeShip(5, 0, 0);
-  p1.gameboard.placeShip(4, 5, 2);
-  p1.gameboard.placeShip(3, 3, 5);
-  p1.gameboard.placeShip(3, 0, 8);
-  p1.gameboard.placeShip(2, 6, 8);
   const p2 = Player();
-  // p2.gameboard.placeShip(5, 5, 9);
-  // p2.gameboard.placeShip(4, 1, 3);
-  // p2.gameboard.placeShip(3, 3, 5);
-  // p2.gameboard.placeShip(3, 7, 2);
-  // p2.gameboard.placeShip(2, 2, 1);
+  p2.gameboard.placeShip(5, 0, 0);
+  p2.gameboard.placeShip(4, 5, 2);
+  p2.gameboard.placeShip(3, 3, 5);
+  p2.gameboard.placeShip(3, 0, 8);
+  p2.gameboard.placeShip(2, 6, 8);
 
   function gameTurns() {
     Dom.clearGameboard("p2");
@@ -42,9 +37,14 @@ function gameLoop() {
     }
   }
 
-  Dom.placeShipsPopup(p2.gameboard, 0, p1.gameboard, gameTurns);
+  Dom.placeShipsPopup(p1.gameboard, p2.gameboard, 0, gameTurns);
 }
 
 gameLoop();
 
 module.exports = gameLoop;
+
+// Bugs:
+//  popup allows overlapping ships
+//  user places p2 ships instead of p1
+//  no winner announcement

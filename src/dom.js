@@ -101,18 +101,18 @@ function Dom() {
     document.querySelector("#popup").classList.add("hidden");
   }
 
-  function placeShipsPopup(p2gameboard, shipIndex, p1Gameboard, gameturns) {
+  function placeShipsPopup(p1Gameboard, p2Gameboard, shipIndex, gameturns) {
     if (shipIndex === 5) {
       dismissPopup();
       renderGameboard("p1", p1Gameboard);
-      renderGameboard("p2", p2gameboard);
-      playerClicks(gameturns, p2gameboard);
+      renderGameboard("p2", p2Gameboard);
+      playerClicks(gameturns, p2Gameboard);
       return;
     }
     const popupBoard = document.querySelector("#placeShipsBoard");
     const currentShipHeader = document.querySelector("#currentShipHeader");
     if (popupBoard) clearGameboard("popupBoard");
-    renderGameboard("popupBoard", p2gameboard);
+    renderGameboard("popupBoard", p1Gameboard);
     currentShipHeader.textContent = `Place your ${
       currentShip(shipIndex).shipName
     }`;
@@ -129,13 +129,13 @@ function Dom() {
         ),
         cell.addEventListener("click", () => {
           if (
-            p2gameboard.placeShip(
+            p1Gameboard.placeShip(
               currentShip(shipIndex).size,
               Number(cell.dataset.x),
               Number(cell.dataset.y),
             )
           ) {
-            placeShipsPopup(p2gameboard, shipIndex + 1, p1Gameboard, gameturns);
+            placeShipsPopup(p1Gameboard, p2Gameboard, shipIndex + 1, gameturns);
           }
         }),
       ),
