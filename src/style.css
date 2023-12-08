@@ -19,6 +19,10 @@ body {
   opacity: 70%;
 }
 
+.hidden {
+  display: none;
+}
+
 #popup {
   position: absolute;
   top: 50%;
@@ -49,14 +53,24 @@ main {
   display: flex;
   gap: 2rem;
 }
-.p1Board,
-.p2Board {
-  /* border: 2px solid black; */
+#p1Board,
+#p2Board,
+#placeShipsBoard {
   width: 300px;
   aspect-ratio: 1 / 1;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
 }
+
+#popup {
+  width: fit-content;
+  height: fit-content;
+}
+
+#placeShipsBoard {
+  margin: 1rem;
+}
+
 .boardColumn {
   display: flex;
   flex-direction: column;
@@ -84,6 +98,14 @@ main {
 }
 .m {
   background-color: rgb(48, 48, 179);
+}
+
+.popupBoardCell.s {
+  background-color: purple;
+}
+
+.hoverShip {
+  background-color: green;
 }
 footer {
   text-align: center;
