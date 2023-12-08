@@ -16,7 +16,7 @@ function Gameboard() {
 
   function shipNotOverlapping(length, x, y) {
     for (let i = x; i < x + length; i += 1) {
-      if (typeof board[i][y][0] === "object") return false;
+      if (board[i][y][0] === "s") return false;
     }
     return true;
   }
