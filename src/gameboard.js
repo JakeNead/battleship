@@ -36,7 +36,9 @@ function Gameboard() {
         board[i][y][1] = ship;
       }
       fleet.push(ship);
+      return true;
     }
+    return false;
   }
 
   function receiveAttack(x, y) {
