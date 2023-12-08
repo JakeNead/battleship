@@ -6,9 +6,6 @@ function Dom() {
     body.innerHTML =
       "<div id='overlay'></div><div id='popup'><h2 id='currentShipHeader'></h2><div id='placeShipsBoard'></div></div><header><h1>BATTLESHIP</h1></header><main><div id='boards'><div id='p1Board'></div><div id='p2Board'></div></div></main><footer>Made by Jake</footer>";
   }
-  // const p1Board = document.querySelector("#p1Board");
-  // const p2Board = document.querySelector("#p2Board");
-  // const popupBoard = document.querySelector("#placeShipsBoard");
 
   function renderGameboard(playerBoard, board) {
     const p1Board = document.querySelector("#p1Board");
@@ -36,8 +33,8 @@ function Dom() {
   }
 
   function clearGameboard(player) {
-    const p1Board = document.querySelector(".p1Board");
-    const p2Board = document.querySelector(".p2Board");
+    const p1Board = document.querySelector("#p1Board");
+    const p2Board = document.querySelector("#p2Board");
     const popupBoard = document.querySelector("#placeShipsBoard");
     let playerBoard;
     if (player === "p1") playerBoard = p1Board;
@@ -50,18 +47,18 @@ function Dom() {
     // this will run when gameTurns detects a winner
   }
 
-  function shoot(cell, gameTurns, player) {
+  function shoot(cell, gameTurns, gameboard) {
     const { x } = cell.dataset;
     const { y } = cell.dataset;
-    player.gameboard.receiveAttack(x, y);
+    gameboard.receiveAttack(x, y);
     gameTurns();
   }
 
-  function playerClicks(gameTurns, player) {
-    const cells = document.querySelectorAll(".p2cell");
+  function playerClicks(gameTurns, gameboard) {
+    const cells = document.querySelectorAll(".p2Cell");
     cells.forEach((cell) => {
       if (!cell.classList.contains("h") || !cell.classList.contains("m"))
-        cell.addEventListener("click", () => shoot(cell, gameTurns, player));
+        cell.addEventListener("click", () => shoot(cell, gameTurns, gameboard));
     });
   }
 
@@ -99,14 +96,23 @@ function Dom() {
       } // cell.classList.remove("hoverShip");
   }
 
-  function dismissPopup() {}
+  function dismissPopup() {
+    document.querySelector("#overlay").classList.add("hidden");
+    document.querySelector("#popup").classList.add("hidden");
+  }
 
-  function placeShipsPopup(gameboard, shipIndex = 0) {
+  function placeShipsPopup(p2gameboard, shipIndex, p1Gameboard, gameturns) {
+    if (shipIndex === 5) {
+      dismissPopup();
+      renderGameboard("p1", p1Gameboard);
+      renderGameboard("p2", p2gameboard);
+      playerClicks(gameturns, p2gameboard);
+      return;
+    }
     const popupBoard = document.querySelector("#placeShipsBoard");
-    console.log(popupBoard);
     const currentShipHeader = document.querySelector("#currentShipHeader");
     if (popupBoard) clearGameboard("popupBoard");
-    renderGameboard("popupBoard", gameboard);
+    renderGameboard("popupBoard", p2gameboard);
     currentShipHeader.textContent = `Place your ${
       currentShip(shipIndex).shipName
     }`;
@@ -123,21 +129,17 @@ function Dom() {
         ),
         cell.addEventListener("click", () => {
           if (
-            gameboard.placeShip(
+            p2gameboard.placeShip(
               currentShip(shipIndex).size,
               Number(cell.dataset.x),
               Number(cell.dataset.y),
             )
           ) {
-            placeShipsPopup(gameboard, shipIndex + 1);
+            placeShipsPopup(p2gameboard, shipIndex + 1, p1Gameboard, gameturns);
           }
         }),
       ),
     );
-
-    // on click, call p2.gameboard.placeShip(length, x, y)
-    // if (shipIndex < (shipArray.length)){placeShipsPopup(gameboard, shipIndex + 1)}
-    // else dismissPopup()
   }
 
   return {
