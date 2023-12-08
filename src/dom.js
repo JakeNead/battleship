@@ -88,12 +88,11 @@ function Dom() {
     } else
       for (let i = x - 1; i < x + size - 1; i += 1) {
         if (i >= 9) return;
-        // search/add even listeners here
         const targetCell = document.querySelector(
           `[data-x='${i + 1}'][data-y='${y}']`,
         );
         targetCell.classList.remove("hoverShip");
-      } // cell.classList.remove("hoverShip");
+      }
   }
 
   function dismissPopup() {

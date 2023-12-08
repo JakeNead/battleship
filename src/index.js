@@ -46,5 +46,4 @@ module.exports = gameLoop;
 
 // Bugs:
 //  popup allows overlapping ships
-//  user places p2 ships instead of p1
 //  no winner announcement
