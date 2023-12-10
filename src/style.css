@@ -134,5 +134,15 @@ main {
   background-color: green;
 }
 footer {
+  width: 100vw;
+  position: absolute;
+  bottom: 0;
+}
+
+footer p {
   text-align: center;
+  margin: 10px;
+}
+a {
+  text-decoration: none;
 }

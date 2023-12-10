@@ -2,7 +2,7 @@ function Dom() {
   function initPage() {
     const body = document.querySelector("body");
     body.innerHTML =
-      "<div id='overlay'></div><div id='popup'><h2 id='currentShipHeader'></h2><div id='placeShipsBoard'></div></div><div id='winMessage' class='hidden'><h2 id='theWinnerIs'></h2><button id='playAgain'>Play again</button></div><header><h1>BATTLESHIP</h1></header><main><div id='boards'><div id='p1Board'></div><div id='p2Board'></div></div></main><footer>Made by Jake</footer>";
+      "<div id='overlay'></div><div id='popup'><h2 id='currentShipHeader'></h2><div id='placeShipsBoard'></div></div><div id='winMessage' class='hidden'><h2 id='theWinnerIs'></h2><button id='playAgain'>Play again</button></div><header><h1>BATTLESHIP</h1></header><main><div id='boards'><div id='p1Board'></div><div id='p2Board'></div></div></main><footer><a href='https://github.com/JakeNead'><p>Made by Jake</p></a></footer>";
   }
 
   function renderGameboard(playerBoard, board) {
