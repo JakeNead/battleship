@@ -41,7 +41,12 @@ function Dom() {
     while (playerBoard.firstChild)
       playerBoard.removeChild(playerBoard.lastChild);
   }
-  function declareWinner(player) {
+  function clearPage() {
+    while (document.body.firstChild)
+      document.body.removeChild(document.body.lastChild);
+  }
+
+  function declareWinner(player, gameLoop) {
     document.querySelector("#overlay").classList.remove("hidden");
     const winner = document.querySelector("#winMessage");
     winner.classList.remove("hidden");
@@ -50,7 +55,10 @@ function Dom() {
     if (player === "p1") theWinnerIs.textContent = "You won!";
     else theWinnerIs.textContent = "The computer won...";
     const playAgain = document.querySelector("#playAgain");
-    playAgain.addEventListener("click", () => {});
+    playAgain.addEventListener("click", () => {
+      clearPage();
+      gameLoop();
+    });
   }
 
   function shoot(cell, gameTurns, gameboard) {
