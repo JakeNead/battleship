@@ -42,6 +42,6 @@ function gameLoop() {
 
 gameLoop();
 
-// start over button
-// random p2 ship placements
+// random computer ship placements?
 // ship orientation choice?
+// pass and play mode?
