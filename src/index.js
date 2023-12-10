@@ -23,7 +23,7 @@ function gameLoop() {
     if (p2.gameboard.allShipsSunk()) {
       Dom.clearGameboard("p2");
       Dom.renderGameboard("p2", p2.gameboard);
-      Dom.declareWinner();
+      Dom.declareWinner("p1");
       console.log("p1 wins");
       return "p1 wins";
     }
@@ -31,8 +31,10 @@ function gameLoop() {
     Dom.clearGameboard("p1");
     Dom.renderGameboard("p1", p1.gameboard);
     if (p1.gameboard.allShipsSunk()) {
-      Dom.disableAttacks();
-      console.log("p1 wins");
+      Dom.clearGameboard("p2");
+      Dom.renderGameboard("p2", p2.gameboard);
+      Dom.declareWinner("p2");
+      console.log("p2 wins");
       return "p2 wins";
     }
   }
@@ -44,6 +46,6 @@ gameLoop();
 
 module.exports = gameLoop;
 
-// Bugs:
-//  popup allows overlapping ships
-//  no winner announcement
+// start over button
+// random p2 ship placements
+// ship orientation choice?

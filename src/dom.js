@@ -1,10 +1,8 @@
-// const gameController = require("./index");
-
 function Dom() {
   function initPage() {
     const body = document.querySelector("body");
     body.innerHTML =
-      "<div id='overlay'></div><div id='popup'><h2 id='currentShipHeader'></h2><div id='placeShipsBoard'></div></div><header><h1>BATTLESHIP</h1></header><main><div id='boards'><div id='p1Board'></div><div id='p2Board'></div></div></main><footer>Made by Jake</footer>";
+      "<div id='overlay'></div><div id='popup'><h2 id='currentShipHeader'></h2><div id='placeShipsBoard'></div></div><div id='winMessage' class='hidden'><h2 id='theWinnerIs'></h2><button id='playAgain'>Play again</button></div><header><h1>BATTLESHIP</h1></header><main><div id='boards'><div id='p1Board'></div><div id='p2Board'></div></div></main><footer>Made by Jake</footer>";
   }
 
   function renderGameboard(playerBoard, board) {
@@ -43,8 +41,16 @@ function Dom() {
     while (playerBoard.firstChild)
       playerBoard.removeChild(playerBoard.lastChild);
   }
-  function declareWinner() {
-    // this will run when gameTurns detects a winner
+  function declareWinner(player) {
+    document.querySelector("#overlay").classList.remove("hidden");
+    const winner = document.querySelector("#winMessage");
+    winner.classList.remove("hidden");
+
+    const theWinnerIs = document.querySelector("#theWinnerIs");
+    if (player === "p1") theWinnerIs.textContent = "You won!";
+    else theWinnerIs.textContent = "The computer won...";
+    const playAgain = document.querySelector("#playAgain");
+    playAgain.addEventListener("click", () => {});
   }
 
   function shoot(cell, gameTurns, gameboard) {
